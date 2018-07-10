@@ -40,6 +40,9 @@ public:
     bool isFull(){
         return cs==ms;
     }
+    int size(){
+    return cs;
+    }
 
 
 };
