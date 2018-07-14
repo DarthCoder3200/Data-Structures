@@ -132,6 +132,51 @@ void levelOrderInput(node*&root){
     }
 }
 
+class myPair{
+public:
+        int height;
+        int diameter;
+};
+
+myPair diameterFast(node*root){
+    myPair p;
+    if(root = NULL){
+        p.height = 0;
+        p.diameter = 0;
+        return p;
+    }
+    myPair left = diameterFast(root -> left);
+    myPair right = diameterFast(root -> right);
+    int d1 = left.diameter;
+    int d2 = right.diameter;
+    int h1 = left.height;
+    int h2 = right.height;
+
+    p.diameter = max(h1 + h2,max(d1,d2));
+    p.height = 1 + max(h1,h2);
+
+}
+class sumPair{
+public:
+    int exc;
+    int inc;
+};
+sumPair maxSumProblem(node*root){
+    sumPair p;
+    if(root == NULL){
+        p.exc = 0;
+        p.inc = 0;
+        return p;
+    }
+    sumPair left = maxSumProblem(root->left);
+    sumPair right = maxSumProblem(root->right);
+
+    p.inc = root->data + left.exc + right.exc;
+    p.exc = max(left.inc,left.exc) + (right.inc,right.exc);
+
+    return p;
+}
+
 int main(){
     node*root = NULL;
     /*printPreOrder(root);
@@ -143,6 +188,8 @@ int main(){
     cout<<height(root);
     cout<<endl;*/
     levelOrderInput(root);
-    levelOrderPrint(root);
+    cout<<endl;
+    sumPair p = maxSumProblem(root);
+    cout<<"Max Sum is "<<max(p.inc,p.exc);
     return 0;
 }
